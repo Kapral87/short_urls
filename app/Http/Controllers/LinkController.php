@@ -18,10 +18,7 @@ class LinkController extends Controller
     {
         $link = Link::create($request->validated());
 
-        $link['short_url'] = implode('/', [
-            $request->getSchemeAndHttpHost(),
-            $link['unique_id']
-        ]);
+        $link['short_url'] = url($link['unique_id']);
         unset($link['id']);
 
         return response()->json($link, 201);
